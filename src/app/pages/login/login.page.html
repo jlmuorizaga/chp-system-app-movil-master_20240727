@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Cheese Pizza Móvil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">Cheese Pizza Móvil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <div id="container">
+          <div style="text-align: center;">
+            <img src="assets/img/logo_cheese_pizza_sombra.png" alt="Cheese Pizza Character"
+              style="height: auto; width: 150px; object-fit: contain;">
+          </div>
+          <h1>Control de acceso</h1>
+          <p>Ingresa con la cuenta con la que te registraste</p>
+
+          @if(verificandoConexion){
+            <p>Verificando acceso...</p>
+          }
+          @if(showSpinner){
+            <ion-spinner name="lines"></ion-spinner>
+          }
+
+          <form [formGroup]="formularioLogin">
+
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size-lg="12" size-md="12" size-sm="12" size="12">
+                  <ion-input label="Correo electrónico" label-placement="floating" fill="outline"
+                    placeholder="email@domain.com" formControlName="correoElectronico" type="email"></ion-input>
+                  <br/>
+                </ion-col>
+                <ion-col size-lg="12" size-md="12" size-sm="12" size="12">
+                  <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="Número de caracteres entre 3 y 10" formControlName="contrasenia"
+                    type="password"></ion-input>
+                  <br />
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-checkbox formControlName="sesionAbierta">Mantener la sesión abierta</ion-checkbox>
+            <br />
+            <ion-button color="tertiary" (click)="realizaLogin()">Ingresar&nbsp;<ion-icon
+                name="log-in-outline"></ion-icon></ion-button>
+          </form>
+          <br/>
+          <p>¿No tienes una cuenta?</p>
+          <ion-button color="warning" (click)="navegaRegistro()">Regístrate&nbsp;<ion-icon
+              name="person-add-outline"></ion-icon></ion-button>
+          <br/><br/>
+          <p>¿Olvidaste tu contraseña?</p>
+          <ion-button color="warning" (click)="navegaRecuperaContrasenia()">Recupera contraseña&nbsp;<ion-icon
+              name="person-add-outline"></ion-icon></ion-button>
+          <br/><br/>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

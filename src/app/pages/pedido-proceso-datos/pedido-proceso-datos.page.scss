@@ -1,0 +1,28 @@
+#container {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .titulo {
+    font-size: 1.3rem;
+  }
+
+  .estatusPedido {
+    font-size: 1.5rem;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  
+  #container ion-input, ion-textarea {
+    text-align: left;
+  }
+
+  ion-avatar {
+    --border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}

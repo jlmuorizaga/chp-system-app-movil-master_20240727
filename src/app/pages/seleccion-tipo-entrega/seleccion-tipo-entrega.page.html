@@ -1,0 +1,129 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Cheese Pizza Móvil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">Cheese Pizza Móvil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+
+        <div id="container">
+          <h2>Bienvenido</h2>
+          <h1>{{nombreCliente}}</h1>
+          <ion-button color="warning" (click)="modificarDatosCliente()">Modificar tus datos&nbsp;<ion-icon
+            name="pencil-outline"></ion-icon></ion-button>
+          <div style="text-align: center;">
+            <img src="assets/img/suc-img-cheeseboy.png" alt="Cheese Pizza Character"
+              style="height: auto; width: 120px; object-fit: contain;">
+          </div>
+          @if (administradorPedido.getCantidadPedidosEnProceso()>0) {
+
+          <p>Pedidos en proceso: <strong>{{administradorPedido.getCantidadPedidosEnProceso()}}</strong></p>
+
+          <ion-grid fixed>
+            <ion-row>
+              @for (pedido of administradorPedido.getPedidosEnProceso(); track $index) {
+              <ion-col size-sm="12" size-md="6" size-lg="4" size-xl="4" size="12">
+                <ion-card (click)="stopInterval()" [routerLink]="['/pedido-proceso-datos/' + pedido.idPedido]">
+                    <ion-card-header>
+                    <ion-card-subtitle>Sucursal: {{pedido.datosSucursal}}</ion-card-subtitle>
+                    <ion-card-title>Pedido # {{pedido.numeroPedido}}</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ion-label>
+                      <p>{{pedido.textoModalidadEntrega}}</p>
+                      <p>{{pedido.resumenPedido}}</p>
+                      <p>Estatus:<br><strong class="estatusPedido">{{pedido.textoEstatus}}</strong></p>
+                    </ion-label>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+              }
+            </ion-row>
+          </ion-grid>
+
+          <br>
+          <p>Para realizar otro pedido más, por favor primero selecciona la forma de entrega:</p>
+          }@else {
+          <p>Para realizar un pedido, por favor primero selecciona la forma de entrega:</p>
+          }
+          @if(verificandoConexion){
+            <p>Verificando acceso...</p>
+          }
+          @if(showSpinner){
+            <br/>
+            <ion-spinner name="lines"></ion-spinner>
+          }
+          <br>
+          <ion-radio-group [(ngModel)]="opcionSeleccionada">
+
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size-sm="12" size-md="6" size-lg="6" size-xl="6" size="12">
+                  <ion-card class="botonTarjeta" (click)="onClickDomicilio()">
+                    <ion-card-content>
+                      <ion-grid fixed>
+                        <ion-row>
+                          <ion-col size="4">
+                            <ion-avatar>
+                              <img alt="" src="assets/img/casa.png" />
+                            </ion-avatar>
+                          </ion-col>
+                          <ion-col size="8">
+                            <br>
+                            <h1>Entrega a domicilio</h1>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+                <ion-col size-sm="12" size-md="6" size-lg="6" size-xl="6" size="12">
+                  <ion-card class="botonTarjeta" (click)="onClickSucursal()">
+                    <ion-card-content>
+                      <ion-grid fixed>
+                        <ion-row>
+                          <ion-col size="4">
+                            <ion-avatar>
+                              <img alt="" src="assets/img/sucursal.png" />
+                            </ion-avatar>
+                          </ion-col>
+                          <ion-col size="8">
+                            <br>
+                            <h1>Entrega en sucursal</h1>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </ion-radio-group>
+          <br>
+          <br>
+          <ion-button color="warning" (click)="cerrarSesion()">Cerrar sesión&nbsp;<ion-icon
+              name="log-out-outline"></ion-icon></ion-button>
+          <br>
+          <br>
+          <ion-button color="secondary" (click)="muestraHistorialPedidos()">Ver historial de pedidos&nbsp;<ion-icon
+            name="log-out-outline"></ion-icon></ion-button>
+        <br>
+        <br>
+
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

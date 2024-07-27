@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Cheese Pizza Móvil</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Cheese Pizza Móvil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <div id="container">
+          @if(verificandoConexion){
+            <p>Verificando acceso...</p>
+          }
+          @if(showSpinner){
+            <br/>
+            <ion-spinner name="lines"></ion-spinner>
+            <br />
+          }
+          <h1>Página de pago</h1>
+          <p><strong>Pedido para: {{modalidadEntrega}}</strong></p>
+          <p><strong>Sucursal: {{nombreSucursal}}</strong></p>
+          <div *ngIf="this.administradorPedido.getTipoEntrega().getTipo() === 'ES'">
+            <p>{{textoDomicilio}}</p>
+          </div>
+          <br *ngIf="this.administradorPedido.getTipoEntrega().getTipo() === 'ED'">
+          <p><strong>Cliente: {{nombreCliente}}</strong></p>
+          <div *ngIf="this.administradorPedido.getTipoEntrega().getTipo() === 'ED'">
+            <p>{{textoDomicilio}}</p>
+          </div>
+
+          <br/><br/>
+          <ion-label>
+            <h1>Total: {{pedido.montoTotalMoneda()}}</h1>
+          </ion-label>
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                Proporciona los datos de tu tarjeta de crédito o débito
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+
+              <!-- Incluye el componente del formulario de pago aquí -->
+              <app-payment-form></app-payment-form>
+
+            </ion-card-content>
+          </ion-card>
+          <h1>¿Olvidaste algo?</h1>
+          <ion-button color="secondary" (click)="regresaMenu()"><ion-icon name="bag-check-outline"></ion-icon>
+            &nbsp;Regresar al menú</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

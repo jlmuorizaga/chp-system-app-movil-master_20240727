@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Cheese Pizza Móvil</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Cheese Pizza Móvil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <div id="container">
+          <h1>Registro</h1>
+          <p>Por favor escribe tu correo electrónico</p>
+          <form [formGroup]="formularioCorreoCliente">
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size-sm="12" size-md="12" size-lg="6" size-xl="6" size="12">
+                  <ion-input label="Correo electrónico" label-placement="floating" fill="outline"
+                    placeholder="email@domain.com" formControlName="correoElectronico" type="email"></ion-input>
+                </ion-col>
+                <ion-col size-sm="12" size-md="12" size-lg="6" size-xl="6" size="12">
+                  <ion-input label="Confirma correo electrónico" label-placement="floating" fill="outline"
+                    placeholder="email@domain.com" formControlName="confirmaCorreoElectronico" type="email"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <br />
+
+            <ion-button (click)="verificaCorreo()">
+              <ion-icon slot="start" name="chevron-forward-outline"></ion-icon>
+              {{textoBoton}}
+            </ion-button>
+            @if(verificandoConexion){
+              <p>Verificando acceso...</p>
+            }
+              @if(showSpinner){
+              <ion-spinner name="lines"></ion-spinner>
+            }
+            <br/>
+            <br/>
+          </form>
+          @if (codigoEnviado) {
+          <p>Por favor, escribe el código de verificación que enviamos a tu correo para poder continuar con tu registro
+          </p>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size-sm="0" size-md="0" size-lg="3" size-xl="3" size="0">
+
+              </ion-col>
+              <ion-col size-sm="12" size-md="12" size-lg="6" size-xl="6" size="12">
+                <ion-input label="Código de verificacion" label-placement="floating" fill="outline" placeholder="999999"
+                  [(ngModel)]="codigoVerificacionCapturado"></ion-input>
+              </ion-col>
+              <ion-col size-sm="0" size-md="0" size-lg="3" size-xl="3" size="0">
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <br/>
+          <ion-button (click)="verificaCodigo()">
+            <ion-icon slot="start" name="chevron-forward-outline"></ion-icon>
+            Verificar
+          </ion-button>
+          <br/><br/>
+          }
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

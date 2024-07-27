@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Cheese Pizza Pedidos Movil</string>
+    <string name="title_activity_main">Cheese Pizza Pedidos Movil</string>
+    <string name="package_name">mx.appixsoftware.chpsystem.pedidosmovil</string>
+    <string name="custom_url_scheme">mx.appixsoftware.chpsystem.pedidosmovil</string>
+</resources>

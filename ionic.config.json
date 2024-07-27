@@ -1,0 +1,7 @@
+{
+  "name": "CHPSystem app movil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

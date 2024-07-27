@@ -1,0 +1,41 @@
+<h6>Ubica tu domicilio en el mapa</h6>
+<form [formGroup]="formulario">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input label="Domicilio a buscar" label-placement="floating"
+        fill="outline" placeholder="Calle número, Fraccionamiento, Ciudad" 
+        formControlName="domicilioBuscar"></ion-input>
+        <ion-button (click)="buscarDomicilio()">
+          <ion-icon name="search-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        @if(verificandoConexion){
+          <p>Verificando acceso...</p>
+        }
+        @if(showSpinner){
+          <ion-spinner name="lines"></ion-spinner>
+        }
+        <div id="map" class="map" #map></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <div class="informacion">
+          Domicilio:
+          <br />
+          <span id="domicilio"></span>
+          <br /><br />
+          Coordenadas:
+          <br />
+          Latitud: <span id="latitud"></span>
+          <br />
+          Longitud: <span id="longitud"></span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>

@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Cheese Pizza Móvil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">Cheese Pizza Móvil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <img src="assets/img/logo_cheese_pizza_sombra.png" alt="Cheese Pizza Logo"
+      style="height: auto; width: 200px; object-fit: contain;">
+    <h1>Cheese Pizza Móvil</h1>
+    @if(verificandoConexion){
+    <p>Verificando acceso...</p>
+    }
+    @if(showSpinner){
+      <br/>
+      <ion-spinner name="lines"></ion-spinner>
+    }
+  </div>
+</ion-content>

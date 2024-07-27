@@ -1,0 +1,132 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Cheese Pizza Móvil (Historial-pedidos)</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  @if (totalPedidos > 0) {
+  <ion-toolbar>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <div class="ion-text-end">
+            Total de pedidos: <b>{{totalPedidos}}</b>
+          </div>
+        </ion-col>
+      </ion-row>
+      @if (totalPedidos > registrosXPagina) {
+        <ion-row>
+          <ion-col size="12">
+            <div class="ion-text-end">
+              <ion-button size="default" color="tertiary" [disabled]="deshabilitadoDecrementaPagina" (click)="decrementaPagina()">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+              </ion-button>
+              <strong class="pagina">Página {{paginaActual}} de {{totalPaginas}}</strong>
+              <ion-button size="default" color="tertiary" [disabled]="deshabilitadoIncrementaPagina" (click)="incrementaPagina()">
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      }
+    </ion-grid>
+  </ion-toolbar>
+  }
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">Cheese Pizza Móvil (Historial-pedidos)</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+  @if(verificandoConexion){
+    <p>Verificando acceso...</p>
+  }
+  @if(showSpinner){
+    <br/>
+    <ion-spinner name="lines"></ion-spinner>
+  }
+  </div>
+
+  <ion-grid fixed>
+    <ion-accordion-group>
+      @for (pedido of pedidos; track $index) {
+        <ion-row>
+          <ion-col>
+            <ion-accordion value="{{pedido.idPedido}}" toggleIconSlot="end">
+              <ion-item slot="header">
+                <ion-chip>
+                  <ion-avatar>
+                    {{pedido.numeroPedido}}
+                  </ion-avatar>
+                  <ion-label>{{convierteAFechaYFormatea(pedido.fechaHora)}}</ion-label>
+                </ion-chip>
+              </ion-item>
+              <div slot="content">
+                <ion-card>
+                  <ion-card-content>
+                    <ion-grid fixed>
+                      <ion-row>
+                        <ion-col size-sm="12" size-md="6" size-lg="6" size-xl="6" size="12">
+                          <div class="titulo">Datos generales</div>
+                          <p>Pedido #<strong>{{pedido.numeroPedido}}</strong></p>
+                          <p>Fecha y hora</p><strong>{{convierteAFechaYFormatea(pedido.fechaHora)}}</strong>
+                          <p>Sucursal</p><strong>{{pedido.datosSucursal}}</strong>
+                          <p>Modalidad de entrega</p><strong>{{textoModalidadEntrega(pedido.modalidadEntrega)}}</strong>
+                          @if (entregaEnSucursal) {
+                            <p>Domicilio de la sucursal</p><strong>{{domicilioSucursal}}</strong>
+                          }
+                          <p>Cliente</p>
+                          <strong>
+                          @for (item of textoPipe2Array(pedido.datosCliente); track $index) {
+                            {{item}}<br>
+                          }
+                          </strong>
+                          @if (pedido.datosDomicilioCliente) {
+                            <p>Domicilio para entrega</p><strong>{{pedido.datosDomicilioCliente}}</strong>
+                          }
+                        </ion-col>
+                        <ion-col size-sm="12" size-md="6" size-lg="6" size-xl="6" size="12">
+                          <div class="titulo">Estatus del pedido</div>
+                          <p>Resumen Pedido</p><strong>{{pedido.resumenPedido}}</strong>
+                          <p>Detalle del pedido</p>
+                          <strong>
+                          @for (item of textoPipe2Array(pedido.detallePedido); track $index) {
+                            {{item}}<br>
+                          }
+                          </strong>
+                          @if (pedido.instruccionesEspeciales) {
+                            <p>Instrucciones especiales</p><strong>{{pedido.instruccionesEspeciales}}</strong>
+                          }
+                          @if (pedido.promocionesAplicadas) {
+                            <p>Promociones aplicadas</p><strong>{{pedido.promocionesAplicadas}}</strong>
+                          }
+                          <br/><br/>
+                          <p>Monto total</p>
+                          <strong>${{pedido.montoTotal}}</strong>
+                          <br/><br/>
+                          <a href="{{pedido.urlReciboPago}}" target="_blank" rel="noopener noreferrer">
+                            Ver Recibo de pago
+                          </a>
+                          <br/><br/>
+                          <p>Nota. El recibo estará disponible solo durante 30 días depués de la fecha de la compra.</p>
+                      </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+              </div>
+            </ion-accordion>
+          </ion-col>
+        </ion-row>
+      }
+    </ion-accordion-group>
+  </ion-grid>
+
+</ion-content>

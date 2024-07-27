@@ -1,0 +1,21 @@
+.map {
+//  position: absolute;
+  height: 400px;
+  width: auto;
+//  background-color: transparent;
+//  opacity: 1;
+//  transition: opacity 150ms ease-in;
+}
+  
+.map.visible {
+  opacity: 1;
+}
+
+.informacion {
+  text-align: left;
+  font-size: 1.00rem;
+  color: #aaa;
+  span {
+    color: #fff;
+  }
+}
